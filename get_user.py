@@ -32,7 +32,8 @@ print ('working so far for {}'.format(username))
 
 def main(username):
     userjson = get_user_data(username)
-    report_table(userjson)
+    htmldata,fullpath = report_table(userjson,username)
+    gen_pdf(htmldata,fullpath,username)
     print('\n\n\n')
     #print(json.dumps(userjson,sort_keys=True,indent=4))
 

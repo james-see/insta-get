@@ -4,6 +4,10 @@ import json
 from config import *
 from tqdm import tqdm,trange
 from tabulate import tabulate
+from weasyprint import HTML, CSS
+from PIL import Image
+from io import BytesIO
+import os
 #def get_user_data(username):
 #    r = requests.get('https://www.instagram.com/'+username+'/?__a=1', stream=True)
 #    total_length = int(r.headers.get('content-length'))
@@ -57,8 +61,19 @@ def get_user_data(username):
     print("stored data as {}".format(usernamefile))
     return jsonit
 
-def report_table(jsondata):
+def report_table(jsondata,username):
+    try: os.mkdir(os.path.join(storage_path, username))
+    except: print('directory for user already exists, continuing to write')
+    try: os.mkdir(os.path.join(storage_path, username+'/images'))
+    except: print('images sub directory already exists for profile image storage, continuing to write')
+    projdir = storage_path+username+'/'
+    usernamefile = 'user_'+username+'.html'
+    fullpath = projdir+usernamefile
     reporter = {"info_type":[],"info":[]}
+    # get profile image
+    imagetodownload = jsondata['user']['profile_pic_url_hd']
+    response = requests.get(imagetodownload)
+    img = Image.open(BytesIO(response.content)).save(projdir+'images/'+username+'.jpg')
     for key in jsondata['user']:
         if key == 'media':
             continue
@@ -68,5 +83,15 @@ def report_table(jsondata):
             continue
         reporter['info_type'].append(key)
         reporter['info'].append(jsondata['user'][key])
-    print (tabulate(reporter,headers="keys",tablefmt="fancy_grid"))
-    return
+    htmltable = tabulate(reporter,headers="keys",tablefmt="html")
+    htmldata = "<!DOCTYPE=HTML><body><img src='images/"+username+".jpg'>"+htmltable+"</body></html>"
+    # print(htmltable) # testing html output
+    with open(projdir+usernamefile,'w') as f:
+        f.write(htmldata)
+    return htmldata,fullpath
+
+def gen_pdf(htmldata,fullpath,username):
+    filename = fullpath.rsplit('/',1)[1]
+    HTML(filename=fullpath).write_pdf(storage_path+username+'/'+filename+".pdf",
+    stylesheets=[CSS(string='body { font-family: sans-serif !important; } @page { size: A3; margin: 1cm; } table {border-collapse: collapse;} table,th, td {border: 1px solid black;} th {background-color:#d3d3d3;}')])
+    return "success"
