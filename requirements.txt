@@ -1,0 +1,7 @@
+tqdm
+argparse
+requests
+colorama
+weasyprint
+PIL
+tabulate
