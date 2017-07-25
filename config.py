@@ -1,1 +1,1 @@
-storage_path = '/Users/jc/Downloads/'
+storage_path = '/Users/jc/'

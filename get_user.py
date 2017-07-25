@@ -22,7 +22,7 @@ print(Style.BRIGHT+Fore.YELLOW + '''  _____ _   _  _____ _______             ___
  |_____|_| \_|_____/   |_/_/    \_\     \_____|______|  |_|
 
 ''')
-print(Back.BLUE+'storage path set as /Users/jclabpro/Downloads/, to change edit config.py\n\n')
+print(Back.BLUE+'storage path set as {}, to change edit config.py\n\n'.format(storage_path))
 username = ''
 while username == '':
     print(Fore.GREEN+'---'*15)
