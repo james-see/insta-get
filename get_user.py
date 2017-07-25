@@ -1,3 +1,6 @@
+# What: Gets an insta users profile info and posts as necessary into a html and pdf file
+# How: setup config.py with the output path you want
+
 import requests,json
 import datetime
 from config import *
@@ -10,6 +13,7 @@ except: exit('you must pip install colorama first')
 from colorama import Fore, Back, Style
 from tqdm import tqdm
 import argparse
+import sys
 #from termcolor import colored
 init(autoreset=True)
 call('clear')
@@ -22,13 +26,17 @@ print(Style.BRIGHT+Fore.YELLOW + '''  _____ _   _  _____ _______             ___
  |_____|_| \_|_____/   |_/_/    \_\     \_____|______|  |_|
 
 ''')
+# tell the user what the current output path is set to and where to change it
 print(Back.BLUE+'storage path set as {}, to change edit config.py\n\n'.format(storage_path))
 username = ''
+if len(sys.argv) > 1:
+  username = sys.argv[1]
 while username == '':
+    # lets do a nice green input bar!
     print(Fore.GREEN+'---'*15)
     username = input('| Instagram username? | : ')
     print(Fore.GREEN+'---'*15)
-print ('working so far for {}'.format(username))
+# print ('working so far for {}'.format(username)) # for testing
 
 def main(username):
     userjson = get_user_data(username)

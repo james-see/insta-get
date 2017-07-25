@@ -8,6 +8,8 @@ from weasyprint import HTML, CSS
 from PIL import Image
 from io import BytesIO
 import os
+import warnings
+warnings.filterwarnings("ignore")
 #def get_user_data(username):
 #    r = requests.get('https://www.instagram.com/'+username+'/?__a=1', stream=True)
 #    total_length = int(r.headers.get('content-length'))
@@ -55,7 +57,7 @@ def get_user_data(username):
     usernamefile = 'user_'+username+'.json'
     with tqdm(unit='B', unit_scale=True, miniters=1,desc=username) as t:
         urllib.request.urlretrieve(eg_link, filename=storage_path+usernamefile,
-                       reporthook=my_hook(t), data=None)
+                       reporthook=my_hook(t), data=None, )
     with open(storage_path+usernamefile) as f:
         jsonit = json.load(f)
     print("stored data as {}".format(usernamefile))
@@ -84,7 +86,7 @@ def report_table(jsondata,username):
         reporter['info_type'].append(key)
         reporter['info'].append(jsondata['user'][key])
     htmltable = tabulate(reporter,headers="keys",tablefmt="html")
-    htmldata = "<!DOCTYPE=HTML><body><img src='images/"+username+".jpg'>"+htmltable+"</body></html>"
+    htmldata = "<!DOCTYPE=HTML><body><img src='images/"+username+".jpg'>"+htmltable+"<a href""</body></html>"
     # print(htmltable) # testing html output
     with open(projdir+usernamefile,'w') as f:
         f.write(htmldata)
