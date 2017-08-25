@@ -1,0 +1,61 @@
+{
+    "Frame":[
+        {
+            "name":"content",
+            "bg":"gray",
+            "row":0,
+            "weight":1,
+            "width":280,
+            "height":50,
+            "Label":{
+              "bg":"gray",
+               "text":"Input the instagram username you want photos and profile info for:",
+               "column": 0,
+               "row": 0,
+               "wraplength":300
+            }
+        },
+        {
+          "name":"inputbox",
+          "row":1,
+          "Entry":
+            {
+              "name":"instauser",
+              "text":"instauser",
+              "column": 2,
+              "row":2,
+              "justify":"left"
+            }
+        },
+        {
+            "name":"bottom",
+            "row":2,
+            "Button":[
+               {
+                   "name":"ok",
+                   "text":"OK",
+                   "column": 0,
+                   "row": 1
+               },
+               {
+                   "name":"cancel",
+                   "text":"Exit",
+                   "column": 1,
+                   "row": 1
+               }
+            ]
+          },
+        {
+          "name":"warn",
+          "row":3,
+          "Label": 
+            {
+              "text":"note: pdf & data saved to your home folder",
+              "bg":"#d3d3d3",
+              "column":0,
+              "row":3
+            }
+        }
+      ]
+}
+

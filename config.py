@@ -1,1 +1,3 @@
-storage_path = '/Users/jc/'
+from pathlib import Path
+home = str(Path.home()
+storage_path = home+'/'
