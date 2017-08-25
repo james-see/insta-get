@@ -1,3 +1,3 @@
 from pathlib import Path
-home = str(Path.home()
+home = str(Path.home())
 storage_path = home+'/'
