@@ -92,6 +92,7 @@ def report_table(jsondata,username):
         f.write(htmldata)
     return htmldata,fullpath
 
+
 def gen_pdf(htmldata,fullpath,username):
     filename = fullpath.rsplit('/',1)[1]
     HTML(filename=fullpath).write_pdf(storage_path+username+'/'+filename+".pdf",

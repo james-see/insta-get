@@ -40,6 +40,8 @@ while username == '':
 
 def main(username):
     userjson = get_user_data(username)
+    #get_user_images(userjson,username)
+    #exit('works') # testing
     htmldata,fullpath = report_table(userjson,username)
     gen_pdf(htmldata,fullpath,username)
     print('\n\n\n')
