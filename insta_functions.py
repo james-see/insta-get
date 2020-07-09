@@ -73,10 +73,10 @@ def report_table(jsondata,username):
     fullpath = projdir+usernamefile
     reporter = {"info_type":[],"info":[]}
     # get profile image
-    imagetodownload = jsondata['user']['profile_pic_url_hd']
+    imagetodownload = jsondata['graphql']['user']['profile_pic_url_hd']
     response = requests.get(imagetodownload)
     img = Image.open(BytesIO(response.content)).save(projdir+'images/'+username+'.jpg')
-    for key in jsondata['user']:
+    for key in jsondata['graphql']['user']:
         if key == 'media':
             continue
         if key == 'follows' or key == 'followed_by':
@@ -84,7 +84,7 @@ def report_table(jsondata,username):
             reporter['info'].append(jsondata['user'][key]['count'])
             continue
         reporter['info_type'].append(key)
-        reporter['info'].append(jsondata['user'][key])
+        reporter['info'].append(jsondata['graphql']['user'][key])
     htmltable = tabulate(reporter,headers="keys",tablefmt="html")
     htmldata = "<!DOCTYPE=HTML><body><img src='images/"+username+".jpg'>"+htmltable+"<a href""</body></html>"
     # print(htmltable) # testing html output
