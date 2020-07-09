@@ -3,5 +3,5 @@ argparse
 requests
 colorama
 weasyprint
-PIL
+pillow
 tabulate
